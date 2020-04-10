@@ -1,0 +1,12 @@
+iphython
+trinucleotides = {
+'UUU':'Phenylalaine','UUC':'Phenylalanine','UUA':'Leucine','UUG':'Leucine','CUU':'Leucine','CUC':'Leucine','CUA':'Leucine','CUG':'Leucine','AUU':'Isoleucine','AUC':'Isoleucine','AUA':'Isoleucine','AUG':'Methionine','GUU':'Valine','GUC':'Valine','GUA':'Valine','GUG':'Valine','UCU':'Serine','UCC':'Serine','UCA':'Serine','UCG':'Serine','CCU':'Proline','CCC':'Proline','CCA':'Proline','CCG':'Proline','AUU':'Threonine','AUC':'Threonine','AUA':'Threonine','AUG':'Threonine','GCU':'Alanine','GCC':'Alanine','GCA':'Alanine','GCG':'Alanine','UAU':'Tyrosine','UAC':'Tyrosine','UAA':'Stop','UAG':'Stop','CAU':'Histidine','CAC':'Histidine','CAA':'Glutamine','CAG':'Glutamine','AAU':'Asparagine','AAC':'Asparagine','AAA':'Lysine','AAG':'Lysine','GAU':'Aspartic acid','GAC':'Aspartic acid','GAA':'Glutamic acid','GAG':'Glutamic acid','UGU':'Cysteine','UGC':'Cysteine','UGA':'Stop','UGG':'Tryptophan','CGU':'Arginine','CGC':'Arginine','CGA':'Arginine','CGG':'Arginine','AGU':'Serine','AGC':'Serine','AGA':'Arginine','AGG':'Arginine','GGU':'Glycine','GGC':'Glycine','GGA':'Glycine','GGG':'Glycine'}
+s='GATGTAGGTCTGAAAGCAAAAGAAATTTAGGTAGCGGGCAAGTTGGTGACTGATGAGTTAGTTATCGCATTACTCAAAGAACGTATCACACAGGAAGATTGCCGCGTAGGTTTTCTGTTAGACGGGTTCCCGCGTACCATTCCTCAGGCAGATTGCCAGTGAAAGAAGCCGGTATCAAAGTTGATTATTGTGCTGGAGTTTGACTGTTCAACGAGCTGATTGTTGAGCGCATTGTCGGCCGTCGGGTACATCGCTGCTTCAGGCCGTTTATCACGTTAGAATTCAACCCACCAGTTGAAGATAAAGATCGAGTGTTACCGGTGAAGAGCTGACCTATTGTGAATAGAAACTGATCAGGAAGCGACTGTCCGTAAGCGTCTTATCCGAATATCATCAACAAACTGCACATTGGTTTCTTACTATCATAGAAGAGCGGATTGCAGGTAATCCAATATTTAAACTGGACGGAACCCGTAATTGTAGCAAAGTCAGTGCTGAACGGCGACTATTCTCGGTTAATTCTGGATCGGCCTTATAGCTAAGGCGGTTTAAGGCCGCCTTAGCTATTCAAGTAAGAAGGGCGTAGTACCTACAAAAGGAGATTTGGCATAGATAGCAAAGCAAACCCGGCGATTAATTGGTTAATTTGGGGACACCAGTAGCTC'
+m=s.replace('T','U')
+protein=''
+
+#Aquí me pierdo
+for i in range(0,len(m)-(3+len(m)%3), 3):
+if trinucleotides[m[i:i+3]] =='Stop':
+break
+protein += trinucleotides[m[i:i+3]]
