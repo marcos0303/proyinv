@@ -1,0 +1,39 @@
+import pandas as pd
+%matplotlib inline
+import matplotlib.pyplot as plot
+df=pd.read_csv('COVERAGE.ALT2.REANNOTATED.MERGED.MUTECT (1).csv',sep='\t')
+df['label']=df['label'].apply(lambda x: ','.join([x.split('_MariaSantos')[0] for x in x.split(',')]))
+df['N_samples']=df['N_samples'].astype(int)
+df['ALLELE_FREQUENCIES_SUM'] = df['ALLELE_FREQUENCIES'].apply(lambda x: sum(map(float, x.split(',')))) 
+#df['ALLELE_FREQUENCIES_SUM']=df['ALLELE_FREQUENCIES_SUM'].astype(int)
+
+#E=J
+#for x in df:
+    #if (df['VARIANT_CLASS'] != 'SNV' and df['VARIANT_CLASS'] != 'substitution'):
+        #df = df[df['ALT'] == df['Allele']]
+s=list(df)
+m=[]
+for i in s:
+    if '_af' in i:
+        m.append(i)
+print('There are', len(m), 'samples.')
+n=df.groupby(['REF','ALT'])['N_samples'].sum()
+print('There are', len(n), 'different combinations.')
+
+#plot
+q=pd.Series(df.groupby('VARIANT_CLASS')['N_samples'].sum())
+q.plot.pie(label="", title="VARIANT CLASS", startangle=90);
+plot.savefig('Variant class.svg')
+
+
+w=pd.Series(df.groupby('Consequence')['N_samples'].sum())
+w.to_csv('w.csv')
+from matplotlib import pyplot as plt
+w = pd.read_csv('w.csv')
+other=pd.DataFrame([{'Consequence':'Other','N_samples':w[w.N_samples<150].N_samples.sum()}])
+w=w[w.N_samples>=150]
+w=pd.concat([w,other],axis=0)
+w.plot.pie(y='N_samples',labels=w['Consequence'], startangle=90)
+plt.savefig('Consequence.svg')
+
+af=df.groupby(['VARIANT_CLASS'])['ALLELE_FREQUENCIES_SUM'].sum() 
